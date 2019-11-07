@@ -21,7 +21,7 @@ public class CreateEmployee {
         try {
             // create a employee object
             System.out.println("Creating new employee object...");
-            Employee employee = new Employee("Any", "Willson", "Google");
+            Employee employee = new Employee("Henry", "Ford", "Boing");
             System.out.println(employee);
 
             // start a transaction
@@ -35,6 +35,21 @@ public class CreateEmployee {
             session.getTransaction().commit();
 
             System.out.println("Done!");
+
+            // RETRIEVE OBJECT BY PRIMARY KEY
+            int key = 8;
+
+            // start new session and transaction
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+
+            // retrieve student by primary key
+            Employee retrievedEmployee = session.get(Employee.class, key);
+
+            System.out.println("Retrieved employee by key " + key + ": " + retrievedEmployee);
+
+            // commit transaction
+            session.getTransaction().commit();
         } finally {
             factory.close();
         }
