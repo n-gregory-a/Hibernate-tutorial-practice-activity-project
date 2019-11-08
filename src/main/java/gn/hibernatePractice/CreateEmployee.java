@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 public class CreateEmployee {
 
     public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class CreateEmployee {
         try {
             // create a employee object
             System.out.println("Creating new employee object...");
-            Employee employee = new Employee("Henry", "Ford", "Boing");
+            Employee employee = new Employee("Sonya", "Blade", "Boing");
             System.out.println(employee);
 
             // start a transaction
@@ -50,6 +52,26 @@ public class CreateEmployee {
 
             // commit transaction
             session.getTransaction().commit();
+
+            // QUERY EMPLOYEE OBJECT FOR A GIVEN COMPANY
+
+            // start new session and transaction
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+
+            // query employee
+            List<Employee> employees = session.createQuery("from employee").getResultList();
+
+            //display employee
+            System.out.println("Employee of Google");
+            for (Employee tempEmployee1: employees) {
+                System.out.println(tempEmployee1);
+            }
+
+            // commit transaction
+            session.getTransaction().commit();
+
+            System.out.println("Done!");
         } finally {
             factory.close();
         }
