@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class QueryEmployee {
 
     public static void main(String[] args) {
@@ -18,15 +19,21 @@ public class QueryEmployee {
                 .buildSessionFactory();
 
         // create session
+        System.out.println("Creating session...");
         Session session = factory.getCurrentSession();
+        System.out.println("Session created.");
 
         try {
 
             // start a transaction
+            System.out.println("Starting transaction....");
             session.beginTransaction();
+            System.out.println("Transaction started.");
 
             // query employee
-            List<Employee> employees = session.createQuery("from employee").getResultList();
+            System.out.println("Querying...");
+            List<Employee> employees = session.createQuery("from Employee").getResultList();
+            System.out.println("Querying succes...");
 
             // display result
             for (Employee tempEmployee: employees) {
