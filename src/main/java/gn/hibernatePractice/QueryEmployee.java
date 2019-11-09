@@ -32,7 +32,7 @@ public class QueryEmployee {
 
             // query employee
             System.out.println("Querying...");
-            List<Employee> employees = session.createQuery("from Employee").getResultList();
+            List<Employee> employees = session.createQuery("from Employee e where e.company='Google'").getResultList();
             System.out.println("Querying succes...");
 
             // display result
